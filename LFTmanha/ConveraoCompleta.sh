@@ -260,13 +260,13 @@ do
         read resposta 
         resposta=$(echo "$resposta" | tr '[:lower:]' '[:upper:]')
 
-        while [[ "$resposta" != "S" && "$resposta" != "N" && "$resposta" != "NÃO" && "$resposta" != "NAO" && "$resposta" != "SIM" && "$resposta" != "SIM" && "$resposta" != "sim" && "$resposta" != "s" ]]; do
+        while [[ "$resposta" != "S" && "$resposta" != "N" && "$resposta" != "s" && "$resposta" != "n" ]]; do
             echo "Resposta inválida. Por favor, responda com S (Sim) ou N (Não):"
             read resposta
             resposta=$(echo "$resposta" | tr '[:lower:]' '[:upper:]')
         done
 
-        if [[ "$resposta" == "S" || "$resposta" == "SIM" || "$resposta" == "sim" || "$resposta" == "s" ]]; then
+        if [[ "$resposta" == "S" || "$resposta" == "s" ]]; then
             execute=true
         else
             echo "Programa finalizado."
