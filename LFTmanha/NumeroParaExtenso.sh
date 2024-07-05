@@ -30,138 +30,140 @@ do
         dec=$(( (numero % 100) / 10 ))
         uni=$(( numero % 10 ))
 
+        output=""
+
         if [ $numero -eq 1000000 ]; then
-            echo "um milhão"
+            output="um milhão"
         elif [ $numero -eq 100000 ]; then
-            echo "cem mil"
+            output="cem mil"
         elif [ $numero -eq 1000 ]; then
-            echo "mil"
+            output="mil"
         elif [ $numero -eq 100 ]; then
-            echo "cem"
+            output="cem"
         elif [ $numero -eq 0 ]; then
-            echo "zero"
+            output="zero"
         else
             if [ $m -ne 0 ]; then
-                echo -n "um milhão "
+                output+="um milhão "
             fi
 
             case $c in
-                1) echo -n "cem mil " ;;
-                2) echo -n "duzentos mil " ;;
-                3) echo -n "trezentos mil " ;;
-                4) echo -n "quatrocentos mil " ;;
-                5) echo -n "quinhentos mil " ;;
-                6) echo -n "seiscentos mil " ;;
-                7) echo -n "setecentos mil " ;;
-                8) echo -n "oitocentos mil " ;;
-                9) echo -n "novecentos mil " ;;
+                1) output+="cem mil " ;;
+                2) output+="duzentos mil " ;;
+                3) output+="trezentos mil " ;;
+                4) output+="quatrocentos mil " ;;
+                5) output+="quinhentos mil " ;;
+                6) output+="seiscentos mil " ;;
+                7) output+="setecentos mil " ;;
+                8) output+="oitocentos mil " ;;
+                9) output+="novecentos mil " ;;
             esac
 
-            case $d in
-                1)
-                    case $u in
-                        0) echo -n "dez mil " ;;
-                        1) echo -n "onze mil " ;;
-                        2) echo -n "doze mil " ;;
-                        3) echo -n "treze mil " ;;
-                        4) echo -n "quatorze mil " ;;
-                        5) echo -n "quinze mil " ;;
-                        6) echo -n "dezesseis mil " ;;
-                        7) echo -n "dezessete mil " ;;
-                        8) echo -n "dezoito mil " ;;
-                        9) echo -n "dezenove mil " ;;
-                    esac
-                    ;;
-                2) echo -n "vinte " ;;
-                3) echo -n "trinta " ;;
-                4) echo -n "quarenta " ;;
-                5) echo -n "cinquenta " ;;
-                6) echo -n "sessenta " ;;
-                7) echo -n "setenta " ;;
-                8) echo -n "oitenta " ;;
-                9) echo -n "noventa " ;;
-            esac
-
-            if [ $d -gt 1 ] && [ $u -ne 0 ]; then
-                echo -n "e "
-            fi
-
-            if [ $d -ne 1 ]; then
+            if [ $d -eq 1 ]; then
                 case $u in
-                    1) echo -n "um " ;;
-                    2) echo -n "dois " ;;
-                    3) echo -n "três " ;;
-                    4) echo -n "quatro " ;;
-                    5) echo -n "cinco " ;;
-                    6) echo -n "seis " ;;
-                    7) echo -n "sete " ;;
-                    8) echo -n "oito " ;;
-                    9) echo -n "nove " ;;
+                    0) output+="dez mil " ;;
+                    1) output+="onze mil " ;;
+                    2) output+="doze mil " ;;
+                    3) output+="treze mil " ;;
+                    4) output+="quatorze mil " ;;
+                    5) output+="quinze mil " ;;
+                    6) output+="dezesseis mil " ;;
+                    7) output+="dezessete mil " ;;
+                    8) output+="dezoito mil " ;;
+                    9) output+="dezenove mil " ;;
                 esac
+            else
+                case $d in
+                    2) output+="vinte mil " ;;
+                    3) output+="trinta mil " ;;
+                    4) output+="quarenta mil " ;;
+                    5) output+="cinquenta mil " ;;
+                    6) output+="sessenta mil " ;;
+                    7) output+="setenta mil " ;;
+                    8) output+="oitenta mil " ;;
+                    9) output+="noventa mil " ;;
+                esac
+
+                if [ $u -ne 0 ]; then
+                    if [ $d -gt 1 ]; then
+                        output+="e "
+                    fi
+                    case $u in
+                        1) output+="mil " ;;
+                        2) output+="dois mil " ;;
+                        3) output+="três mil " ;;
+                        4) output+="quatro mil " ;;
+                        5) output+="cinco mil " ;;
+                        6) output+="seis mil " ;;
+                        7) output+="sete mil " ;;
+                        8) output+="oito mil " ;;
+                        9) output+="nove mil " ;;
+                    esac
+                fi
             fi
 
-            if [ $numero -ge 1000 ] && [ $cem -ne 0 ]; then
-                echo -n "e "
+            if [ $cem -ne 0 ]; then
+                output+="e "
                 case $cem in
-                    1) echo -n "cem " ;;
-                    2) echo -n "duzentos " ;;
-                    3) echo -n "trezentos " ;;
-                    4) echo -n "quatrocentos " ;;
-                    5) echo -n "quinhentos " ;;
-                    6) echo -n "seiscentos " ;;
-                    7) echo -n "setecentos " ;;
-                    8) echo -n "oitocentos " ;;
-                    9) echo -n "novecentos " ;;
+                    1) output+="cem " ;;
+                    2) output+="duzentos " ;;
+                    3) output+="trezentos " ;;
+                    4) output+="quatrocentos " ;;
+                    5) output+="quinhentos " ;;
+                    6) output+="seiscentos " ;;
+                    7) output+="setecentos " ;;
+                    8) output+="oitocentos " ;;
+                    9) output+="novecentos " ;;
                 esac
             fi
 
-            if [ $numero -ge 100 ] && [ $dec -ne 0 ]; then
-                echo -n "e "
-                case $dec in
-                    1)
-                        case $uni in
-                            0) echo -n "dez " ;;
-                            1) echo -n "onze " ;;
-                            2) echo -n "doze " ;;
-                            3) echo -n "treze " ;;
-                            4) echo -n "quatorze " ;;
-                            5) echo -n "quinze " ;;
-                            6) echo -n "dezesseis " ;;
-                            7) echo -n "dezessete " ;;
-                            8) echo -n "dezoito " ;;
-                            9) echo -n "dezenove " ;;
-                        esac
-                        ;;
-                    2) echo -n "vinte " ;;
-                    3) echo -n "trinta " ;;
-                    4) echo -n "quarenta " ;;
-                    5) echo -n "cinquenta " ;;
-                    6) echo -n "sessenta " ;;
-                    7) echo -n "setenta " ;;
-                    8) echo -n "oitenta " ;;
-                    9) echo -n "noventa " ;;
-                esac
-            fi
-
-            if [ $numero -ge 10 ] && [ $uni -ne 0 ] && [ $dec -ne 1 ]; then
-                echo -n "e "
+            if [ $dec -eq 1 ]; then
+                output+="e "
                 case $uni in
-                    1) echo -n "um " ;;
-                    2) echo -n "dois " ;;
-                    3) echo -n "três " ;;
-                    4) echo -n "quatro " ;;
-                    5) echo -n "cinco " ;;
-                    6) echo -n "seis " ;;
-                    7) echo -n "sete " ;;
-                    8) echo -n "oito " ;;
-                    9) echo -n "nove " ;;
+                    0) output+="dez " ;;
+                    1) output+="onze " ;;
+                    2) output+="doze " ;;
+                    3) output+="treze " ;;
+                    4) output+="quatorze " ;;
+                    5) output+="quinze " ;;
+                    6) output+="dezesseis " ;;
+                    7) output+="dezessete " ;;
+                    8) output+="dezoito " ;;
+                    9) output+="dezenove " ;;
                 esac
+            else
+                case $dec in
+                    2) output+="vinte " ;;
+                    3) output+="trinta " ;;
+                    4) output+="quarenta " ;;
+                    5) output+="cinquenta " ;;
+                    6) output+="sessenta " ;;
+                    7) output+="setenta " ;;
+                    8) output+="oitenta " ;;
+                    9) output+="noventa " ;;
+                esac
+
+                if [ $uni -ne 0 ]; then
+                    output+="e "
+                    case $uni in
+                        1) output+="um " ;;
+                        2) output+="dois " ;;
+                        3) output+="três " ;;
+                        4) output+="quatro " ;;
+                        5) output+="cinco " ;;
+                        6) output+="seis " ;;
+                        7) output+="sete " ;;
+                        8) output+="oito " ;;
+                        9) output+="nove " ;;
+                    esac
+                fi
             fi
         fi
+
+        echo "$output"
     fi
 
     echo ""
-
     echo "$nome, deseja realizar uma nova conversão? [S/N]"
     read resposta 
     resposta=$(echo "$resposta" | tr '[:lower:]' '[:upper:]')
